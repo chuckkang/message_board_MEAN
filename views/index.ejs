@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+	This will be the index page of the project!
+		<div id="wrapper">
+			<h2>Add a post</h2>
+			<form method="POST" action="/addpost">
+				<p>Name: <input type="text" name="name"></p>
+				<p>Comment:</p>
+				<p><textarea name="post" rows="5" cols="50"></textarea></p>
+				<input type="submit" value="Comment">
+			</form>
+		</div>
+		<% if (posts) {%>
+			<div id="wrapper">
+			
+			<% for (var post in posts) { %>
+				<hr> 	 
+				ORIGINAL POST<br>
+					<h2>Name: <%=posts[post].name%><br>
+					Post: <a href="/showsingle/<%=posts[post].id%>"><%= posts[post].post%></a></h2>
+					
+					<% for (var comms of posts[post].comments) {%>
+						COMMENT: <%=comms.comment%><br><br>
+					<% } %>
+			<hr>
+			<h3>Add a comment</h3>
+			<form method="post" action="/addcomment/<%=posts[post].id%>">
+				<p>Name: <input type="text" name="name"></p>
+				<p>Comment:</p>
+				<p><textarea name="comment" rows="5" cols="30"></textarea></p>
+				<input type="submit" value="Comment">
+			</form>
+			<% } %>
+		<% } %>
+			
+		
+		</div>
+		
+		
+	</body>
+</html>
